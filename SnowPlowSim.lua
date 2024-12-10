@@ -113,7 +113,7 @@ local Toggle = AutoFarmTab:CreateToggle({
 
       if Value then
          while true do
-            Wait(1)
+            Wait(5)
             Remote:FireServer()
          end
       end
