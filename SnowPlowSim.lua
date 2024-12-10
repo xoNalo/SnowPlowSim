@@ -192,7 +192,7 @@ local Button = MiscTab:CreateButton({
       local petsHolder = inventoryFrame:WaitForChild("PetsHolder")
       local itemsFrame = petsHolder:WaitForChild("Items")
 
-      -- Table to store pets and their CoinMult values
+      -- Table to store pets and their CoinMult values, along with their model instances
       local pets = {}
       game:GetService("ReplicatedStorage").EggSystemRemotes.UnequipAll:InvokeServer()
 
@@ -212,10 +212,11 @@ local Button = MiscTab:CreateButton({
                      -- Debugging: Output pet name and multiplier
                      print("Found pet: " .. model.Name .. " with CoinMult: " .. coinMult.Value)
 
-                     -- Add the pet name and its CoinMult value to the pets table
+                     -- Add the pet name and its CoinMult value to the pets table (include model instance)
                      table.insert(pets, {
                         Name = model.Name,  -- The name of the pet (e.g., "Dog", "Cat")
-                        CoinMult = coinMult.Value  -- The multiplier value of the pet
+                        CoinMult = coinMult.Value,  -- The multiplier value of the pet
+                        Model = model  -- The model instance
                      })
                   else
                      print("No CoinMult found for model: " .. model.Name)
@@ -249,10 +250,18 @@ local Button = MiscTab:CreateButton({
          print(i .. ". " .. pet.Name .. " with CoinMult: " .. pet.CoinMult)
       end
 
-      -- Equip the best 4 pets
+      -- Equip the best 4 pets, ensuring uniqueness
       local topPets = {}
+      local equippedPetNames = {}  -- Keep track of equipped pet names to avoid duplicates
+
       for i = 1, math.min(4, #pets) do
-         table.insert(topPets, pets[i].Name)  -- Get the name of the top pet
+         local petName = pets[i].Name
+         
+         -- Avoid duplicates by checking if the pet name is already in the equipped list
+         if not equippedPetNames[petName] then
+            table.insert(topPets, pets[i].Model.Name)  -- Get the name of the top pet (from its model)
+            equippedPetNames[petName] = true  -- Mark this pet as equipped
+         end
       end
 
       -- Debugging: Output the pets being equipped
@@ -299,6 +308,7 @@ local Button = MiscTab:CreateButton({
       end
    end
 })
+
 
 
 local Player = MiscTab:CreateSection("Local Player")
