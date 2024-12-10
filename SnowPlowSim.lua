@@ -162,6 +162,8 @@ local Button = EggTab:CreateButton({
 -- [[                  TELEPORT TAB                  ]]
 -- ----------------------------------------------------
 
+local ComingSoon = TeleportTab:CreateSection("Coming Soon!")
+
 -- ----------------------------------------------------
 -- [[                    MISC TAB                    ]]
 -- ----------------------------------------------------
@@ -308,8 +310,6 @@ local Button = MiscTab:CreateButton({
       end
    end
 })
-
-
 
 local Player = MiscTab:CreateSection("Local Player")
 
