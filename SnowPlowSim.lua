@@ -103,6 +103,23 @@ local Toggle = AutoFarmTab:CreateToggle({
    end,
 })
 
+local Toggle = AutoFarmTab:CreateToggle({
+   Name = "Auto Rebirth",
+   CurrentValue = false,
+   Flag = "Autorebirth", -- Unique flag for configuration saving
+   Callback = function(Value)
+      -- Reference to the remote event
+      local Remote = game:GetService("ReplicatedStorage").RebirthEvent
+
+      if Value then
+         while true do
+            Wait(1)
+            Remote:FireServer()
+         end
+      end
+   end,
+})
+
 -- ----------------------------------------------------
 -- [[                    EGG TAB                     ]]
 -- ----------------------------------------------------
