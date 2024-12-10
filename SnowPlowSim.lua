@@ -104,7 +104,6 @@ local Toggle = AutoFarmTab:CreateToggle({
    end,
 })
 
-
 -- ----------------------------------------------------
 -- [[                    EGG TAB                     ]]
 -- ----------------------------------------------------
@@ -197,10 +196,9 @@ local Button = MiscTab:CreateButton({
       local pets = {}
       game:GetService("ReplicatedStorage").EggSystemRemotes.UnequipAll:InvokeServer()
 
-
       -- Loop through each child of the Items frame (which are the pets)
       for _, item in pairs(itemsFrame:GetChildren()) do
-         -- Check if the child is an ImageLabel (this would be the pet container)
+         -- Check if the child is an ImageButton (this would be the pet container)
          if item:IsA("ImageButton") then
             -- Debugging: Check if we are finding a ViewportFrame
             local viewportFrame = item:FindFirstChild("ViewportFrame")
@@ -269,12 +267,39 @@ local Button = MiscTab:CreateButton({
          
          if success then
             print("Successfully equipped: " .. petName)
+            
+            -- Now, update the UI to reflect the equipped pet
+            for _, item in pairs(itemsFrame:GetChildren()) do
+               if item:IsA("ImageButton") then
+                  -- Check if this ImageButton corresponds to the equipped pet
+                  local viewportFrame = item:FindFirstChild("ViewportFrame")
+                  if viewportFrame then
+                     local model = viewportFrame:FindFirstChildOfClass("Model")
+                     if model and model.Name == petName then
+                        -- Set the Equipped BoolValue to true
+                        local equippedValue = item:FindFirstChild("Equipped")
+                        if equippedValue then
+                           equippedValue.Value = true
+                        end
+
+                        -- Make the EquippedIcon visible
+                        local equippedIcon = item:FindFirstChild("EquippedIcon")
+                        if equippedIcon then
+                           equippedIcon.Visible = true
+                        end
+
+                        print("UI updated: " .. petName .. " is now equipped.")
+                     end
+                  end
+               end
+            end
          else
             print("Failed to equip: " .. petName .. " | Error: " .. error)
          end
       end
    end
 })
+
 
 local Player = MiscTab:CreateSection("Local Player")
 
