@@ -162,7 +162,7 @@ local Button = EggTab:CreateButton({
 -- [[                  TELEPORT TAB                  ]]
 -- ----------------------------------------------------
 
-local ComingSoon = TeleportTab:CreateSection("Coming Soon!")
+Label = TeleportTab:CreateLabel("Coming Soon!", "party-popper", Color3.fromRGB(255, 255, 255), false)
 
 -- ----------------------------------------------------
 -- [[                    MISC TAB                    ]]
