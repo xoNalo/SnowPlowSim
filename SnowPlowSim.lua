@@ -276,10 +276,9 @@ local Button = MiscTab:CreateButton({
          local petName = pets[i].Name
          
          -- Avoid duplicates by checking if the pet name is already in the equipped list
-         if not equippedPetNames[petName] then
-            table.insert(topPets, pets[i].Model.Name)  -- Get the name of the top pet (from its model)
-            equippedPetNames[petName] = true  -- Mark this pet as equipped
-         end
+
+         table.insert(topPets, pets[i].Model.Name)  -- Get the name of the top pet (from its model)
+
       end
 
       -- Debugging: Output the pets being equipped
