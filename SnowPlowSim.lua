@@ -337,6 +337,8 @@ local Slider = MiscTab:CreateSlider({
    end,
 })
 
+local Warning = MiscTab:CreateSection("Warning")
+Label = MiscTab:CreateLabel('"Equip Best Pets" can bug the inventory UI', "circle-alert", Color3.fromRGB(255, 255, 255), false)
 
 
 
