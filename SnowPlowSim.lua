@@ -40,7 +40,6 @@ local MiscTab = Window:CreateTab("Misc", nil) -- Title, Image
 local Miscellaneous = MiscTab:CreateSection("Miscellaneous")
 
 local autoclickerRunning = false
-local selectedEgg = "Basic Egg"
 local eggToBuy = "Basic Egg"
 
 local player = game.Players.LocalPlayer
@@ -342,7 +341,7 @@ Label = MiscTab:CreateLabel('"Equip Best Pets" can bug the inventory UI', "circl
 
 
 
-
+-- Webhook Test
 
 
 --[[
